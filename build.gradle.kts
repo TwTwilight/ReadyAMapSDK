@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.github.TwTwilight"
-version = "1.0.3"
+version = "1.0.4"
 
 android {
     namespace = "com.twilight.amapsdk"
@@ -67,9 +67,10 @@ val fatAar by tasks.registering {
     group = "build"
     description = "Bundle libs/amap-3dmap.jar into the AAR classes.jar"
     dependsOn("assembleRelease")
-    inputs.dir(releaseAarDir)
+    mustRunAfter("bundleDebugAar")
     inputs.file(sdkJar)
     outputs.file(fatAarFile)
+    outputs.upToDateWhen { false }
     doLast {
         val src = releaseAarDir.get().asFile
             .listFiles { f -> f.extension == "aar" }
