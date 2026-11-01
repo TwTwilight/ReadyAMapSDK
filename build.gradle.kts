@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.github.TwTwilight"
-version = "1.0.2"
+version = "1.0.3"
 
 android {
     namespace = "com.twilight.amapsdk"
@@ -29,10 +29,6 @@ android {
         buildConfig = false
     }
 
-    publishing {
-        singleVariant("release")
-    }
-
     lint {
         abortOnError = false
         checkReleaseBuilds = false
@@ -45,11 +41,12 @@ android {
 }
 
 val sdkJar = layout.projectDirectory.file("libs/amap-3dmap.jar").asFile
-val aarDir = layout.buildDirectory.dir("outputs/aar")
+val releaseAarDir = layout.buildDirectory.dir("outputs/aar")
+val fatAarFile = layout.buildDirectory.file("outputs/fat/ReadyAMapSDK-release.aar")
 
-fun mergeSdkIntoAar(aar: File, jar: File) {
-    val tmp = File(aar.parentFile, aar.name + ".tmp")
-    ZipFile(aar).use { src ->
+fun mergeSdkIntoAar(target: File, jar: File) {
+    val tmp = File(target.parentFile, target.name + ".tmp")
+    ZipFile(target).use { src ->
         ZipOutputStream(tmp.outputStream().buffered()).use { out ->
             for (e in src.entries()) {
                 if (e.name == "classes.jar" || e.name == "libs/" || e.name == "libs/amap-3dmap.jar") continue
@@ -62,24 +59,36 @@ fun mergeSdkIntoAar(aar: File, jar: File) {
             out.closeEntry()
         }
     }
-    tmp.copyTo(aar, overwrite = true)
+    tmp.copyTo(target, overwrite = true)
     tmp.delete()
 }
 
-tasks.matching { it.name == "bundleReleaseAar" }.configureEach {
+val fatAar by tasks.registering {
+    group = "build"
+    description = "Bundle libs/amap-3dmap.jar into the AAR classes.jar"
+    dependsOn("assembleRelease")
+    inputs.dir(releaseAarDir)
+    inputs.file(sdkJar)
+    outputs.file(fatAarFile)
     doLast {
-        val dir = aarDir.get().asFile
-        val aar = dir.listFiles { f -> f.extension == "aar" }?.firstOrNull()
-            ?: throw GradleException("release aar not found in $dir")
-        mergeSdkIntoAar(aar, sdkJar)
+        val src = releaseAarDir.get().asFile
+            .listFiles { f -> f.extension == "aar" }
+            ?.firstOrNull()
+            ?: throw GradleException("release aar not found")
+        val out = fatAarFile.get().asFile
+        out.parentFile.mkdirs()
+        src.copyTo(out, overwrite = true)
+        mergeSdkIntoAar(out, sdkJar)
+        println("fat aar: ${out.absolutePath} (${out.length()} bytes)")
     }
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            register<MavenPublication>("release") {
-                from(components["release"])
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            artifact(fatAar) {
+                extension = "aar"
+                builtBy(fatAar)
             }
         }
     }

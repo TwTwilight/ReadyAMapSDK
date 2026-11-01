@@ -41,12 +41,12 @@ jobs:
           unzip -p libs/amap-3dmap.jar com/amap/api/col/sl3/ip.class | grep -aq 'amap_keys.json'
 
       - name: Build
-        run: ./gradlew --no-daemon assembleRelease
+        run: ./gradlew --no-daemon fatAar
 
       - name: Check AAR
         run: |
           set -e
-          AAR=$(ls build/outputs/aar/*.aar | head -1)
+          AAR=$(ls build/outputs/fat/*.aar | head -1)
           echo "AAR: $AAR"
           unzip -l "$AAR" | grep -q 'jni/arm64-v8a/libAMapSDK_MAP_v7_1_0.so'
           unzip -l "$AAR" | grep -q 'assets/ae/res.zip'
@@ -59,7 +59,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ReadyAMapSDK-aar
-          path: build/outputs/aar/*.aar
+          path: build/outputs/fat/*.aar
 
   release:
     name: GitHub Release
