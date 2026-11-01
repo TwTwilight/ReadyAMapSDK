@@ -20,11 +20,11 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install platform
-        run: sdkmanager --install "platforms;android-36" "build-tools;36.0.0" > /dev/null
+      - name: Install Android platform
+        run: |
+          SDKMANAGER=$(command -v sdkmanager || echo "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager")
+          yes | "$SDKMANAGER" --licenses > /dev/null || true
+          "$SDKMANAGER" --install "platforms;android-36" "build-tools;36.0.0"
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -38,7 +38,7 @@ jobs:
           test -f src/main/assets/amap_keys.json
           test -f src/main/jniLibs/arm64-v8a/libAMapSDK_MAP_v7_1_0.so
           unzip -l libs/amap-3dmap.jar | grep -q 'com/amap/api/col/sl3/ip.class'
-          unzip -p libs/amap-3dmap.jar com/amap/api/col/sl3/ip.class | strings | grep -q 'amap_keys.json'
+          unzip -p libs/amap-3dmap.jar com/amap/api/col/sl3/ip.class | grep -aq 'amap_keys.json'
 
       - name: Build
         run: ./gradlew --no-daemon assembleRelease
