@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "keys": [
+    {
+      "name": "xiaomi-shop",
+      "apiKey": "8cad7fe9c9626f91e0e3b6721a7c46e4",
+      "package": "com.xiaomi.shop",
+      "sha1": "7B:6D:C7:07:9C:34:73:9C:E8:11:59:71:9F:B5:EB:61:D2:A0:32:25",
+      "sha1Source": "v1"
+    },
+    {
+      "name": "realme-store",
+      "apiKey": "3720a93e5d93cceb93c2a865dc14725d",
+      "package": "com.realme.storecn",
+      "sha1": "20:DA:B8:D1:91:52:2D:35:5F:F0:63:30:6F:C1:36:B3:C6:27:B8:35",
+      "sha1Source": "v1"
+    },
+    {
+      "name": "xiaomi-youpin",
+      "apiKey": "12edbaad3406a10c89ecba8c026324aa",
+      "package": "com.xiaomi.youpin",
+      "sha1": "3E:E1:8A:42:FA:51:03:28:BF:14:E7:2B:95:3B:7F:2A:35:B9:9B:E4",
+      "sha1Source": "v1"
+    },
+    {
+      "name": "eleme",
+      "apiKey": "f9442ac5b1d96e3824b98e7bc48a01c7",
+      "package": "me.ele",
+      "sha1": "7B:B9:38:27:8A:AD:B8:2C:5D:20:A1:58:03:82:1F:CD:F0:70:89:D0",
+      "sha1Source": "v1"
+    },
+    {
+      "name": "railway-12306",
+      "apiKey": "8553c9cde05d1e3741496c515f9102e2",
+      "package": "com.MobileTicket",
+      "sha1": "D9:C8:C3:97:49:E3:D5:14:8B:0B:25:94:C5:1C:19:3B:2A:04:00:EB",
+      "sha1Source": "v1"
+    },
+    {
+      "name": "miui-weather",
+      "apiKey": "d677c2b521da0542b500f3db3e80e317",
+      "package": "com.miui.weather2",
+      "sha1": "B3:D1:CE:9C:2C:64:03:E9:68:53:24:BC:D5:7F:67:7B:13:A5:31:74",
+      "sha1Source": "v1"
+    },
+    {
+      "name": "mi-home",
+      "apiKey": "fe21c0724b32cedcc11b2ecc41ec6349",
+      "package": "com.xiaomi.smarthome",
+      "sha1": "1D:A2:0E:2B:DF:A6:78:AE:88:8E:81:E5:CA:0E:C4:74:4E:BB:BB:BD",
+      "sha1Source": "v1"
+    },
+    {
+      "name": "tongyi",
+      "apiKey": "34578b1b7fa7efac83b6abc28bb6f375",
+      "package": "com.aliyun.tongyi",
+      "sha1": "9D:94:4B:A5:04:64:9E:24:9E:F0:DE:AA:FA:E1:9C:CB:34:0E:2A:94",
+      "sha1Source": "v1"
+    },
+    {
+      "name": "alipay",
+      "apiKey": "7e4e4d24935c4a30249efd2ff5b32149",
+      "package": "com.eg.android.AlipayGphone",
+      "sha1": "84:0F:34:3A:0E:FC:32:5B:A0:BF:75:DA:C8:35:E4:D5:87:03:34:35",
+      "sha1Source": "v1"
+    },
+    {
+      "name": "ocean-tts",
+      "apiKey": "39f804e58cdcb6a4394060b5f8a0831d",
+      "package": "com.larus.nova",
+      "sha1": "2B:3A:D7:54:4A:5E:7A:FF:50:BE:29:12:9A:D4:B6:84:6F:2B:F0:48",
+      "sha1Source": "v1"
+    }
+  ]
+}
