@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.TwTwilight:ReadyAMapSDK:1.0.0")
+    implementation("com.github.TwTwilight:ReadyAMapSDK:v1.0.1")
 }
 ```
 
